@@ -7,6 +7,8 @@
 
     <!--注册service类-->
     <!--这里实际对应的操作：SomeServiceImpl myService = new SomeServiceImpl();-->
+    <!--默认Bean的装配方式为调用的bean类的无参构造器，如果声明了带参构造器，则一定主要要同时声明无参构造器，否则在使用spring容器时会报错，
+    底层其实是通过反射调用getInstance，所以需要无参构造器-->
     <bean id="myService" class="com.xuanzilan.ssm.spring4.service.impl.SomeServiceImpl"/>
 
 </beans>
