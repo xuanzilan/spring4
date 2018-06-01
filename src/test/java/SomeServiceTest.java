@@ -1,4 +1,6 @@
+import com.xuanzilan.ssm.spring4.factory.ServiceFactory;
 import com.xuanzilan.ssm.spring4.service.ISomeService;
+import com.xuanzilan.ssm.spring4.service.impl.SomeServiceImpl;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -43,6 +45,21 @@ public class SomeServiceTest {
         //创建BeanFactory容器
         BeanFactory bc = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
         ISomeService someService = (ISomeService) bc.getBean("myService");
+        someService.doSome();
+    }
+
+
+    @Test
+    public void doSome2(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ServiceFactory serviceFactory = (ServiceFactory) ac.getBean("serviceFactory");
+        serviceFactory.getSomeService().doSome();
+    }
+
+    @Test
+    public void doSome3(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ISomeService someService = (SomeServiceImpl) ac.getBean("myService");
         someService.doSome();
     }
 
