@@ -22,6 +22,7 @@ public class SomeServiceTest {
 
         ISomeService someService = (ISomeService) ac.getBean("myService");
         someService.doSome();
+        ((ClassPathXmlApplicationContext) ac).close();
     }
 
 
