@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+
 /**
  * @Component 中的value属性，对应的是spring配置文件中的<bean id>
  * 另外， Spring 还提供了 3 个功能基本和@Component 等效的注解：
@@ -21,6 +25,8 @@ import org.springframework.stereotype.Component;
  * @Autowired 默认使用byType进行了bean的装配，若属性有 setter，则也可将其加到 setter 上，@Autowired有个参数是required，默认为true
  *
  * @Qualifier 如果想使用byName注入，需要将@Autowired和@Qualifier联合使用
+ *
+ * @Resource 基于JSR-250规范，@Resource表示通过byType注入，@Resource(name="myTeacher")表示通过byName注入
  */
 //@Scope("prototype")
 @Component("myStudent")
@@ -33,7 +39,9 @@ public class Student{
     private int age;
 //    @Qualifier("myTeacher")
 //    @Autowired(required = false)
-    @Autowired
+//    @Autowired
+    @Resource
+//    @Resource(name="myTeacher")
     private Teacher teacher;
 
 
@@ -77,5 +85,15 @@ public class Student{
                 ", age=" + age +
                 ", teacher=" + teacher +
                 '}';
+    }
+
+    @PostConstruct
+    public void afterInit(){
+        System.out.println("初始化刚刚结束");
+    }
+
+    @PreDestroy
+    public void preDestroy(){
+        System.out.println("对象即将关闭");
     }
 }

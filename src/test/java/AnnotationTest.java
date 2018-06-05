@@ -11,6 +11,7 @@ public class AnnotationTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("spring-annotation.xml");
         Student student = (Student) ac.getBean("myStudent");
         System.out.println(student);
+        ((ClassPathXmlApplicationContext) ac).close();
     }
 
     /**
