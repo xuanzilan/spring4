@@ -24,8 +24,9 @@
     </bean>-->
 
     <!--byType通过class来填充，需要添加的bean甚至可以不设置id（匿名类）
-        但是需要注意通过byType时，注入的类在配置文件中智能注册一次，及不能有city1、city2这种相同类，否则会报错如下：
-        expected single matching bean but found 2: city,city1-->
+        但是需要注意通过byType时，注入的类在配置文件中只能注册一次，及不能有city1、city2这种相同类，否则会报错如下：
+        expected single matching bean but found 2: city,city1
+        另外byType注册，是会找对应的类及其子类，这个应该注意-->
     <bean id="school" class="com.xuanzilan.ssm.spring4.bean.autowire.School" autowire="byType">
         <property name="id" value="1"/>
         <property name="sname" value="启明"/>
