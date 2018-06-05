@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="city" class="com.xuanzilan.ssm.spring4.bean.autowire.City">
+        <property name="cid" value="1"/>
+        <property name="cname" value="珠海"/>
+    </bean>
+
+    <!--正常赋值注入的话，通过ref来注入对象等-->
+    <!--<bean id="school" class="com.xuanzilan.ssm.spring4.bean.autowire.School">
+        <property name="id" value="1"/>
+        <property name="sname" value="启明"/>
+        <property name="ciry" ref="city"/>
+    </bean>-->
+
+    <!--注意与上面的区别，不再对city手动注入，通过byName,需要保证bean中属性与已定义的bean的id相同-->
+    <!--<bean id="school" class="com.xuanzilan.ssm.spring4.bean.autowire.School" autowire="byName">
+        <property name="id" value="1"/>
+        <property name="sname" value="启明"/>
+    </bean>-->
+
+    <!--byType通过class来填充，需要添加的bean甚至可以不设置id（匿名类）
+        但是需要注意通过byType时，注入的类在配置文件中智能注册一次，及不能有city1、city2这种相同类，否则会报错如下：
+        expected single matching bean but found 2: city,city1-->
+    <bean id="school" class="com.xuanzilan.ssm.spring4.bean.autowire.School" autowire="byType">
+        <property name="id" value="1"/>
+        <property name="sname" value="启明"/>
+    </bean>
+
+
+    <!--下面的是spel语法来注入的演示，spel主要是可以使用以下几种方法：
+    1.直接引用其他bean类的属性；2.运算符表达式；3.系统方法（如Math.Random,System.*之类的系统参数等）；4.bean内部方法；-->
+    <bean id="spelBean" class="com.xuanzilan.ssm.spring4.bean.spel.SpelBean">
+        <!--直接引用其他bean的方法-->
+        <property name="item1" value= "#{school.id}"/>
+        <!--使用运算符表达式,这里比较恶心啊，property中value中不能有<，只能先转义了，其实本来就是个三目运算符：a<20?20:a-->
+        <property name="item2" value="#{school.id > 20 ? 20:school.id}"/>
+        <!--产生随机数-->
+        <property name="item3" value="#{T(java.lang.Math).random()*50}"/>
+        <!--bean内部的方法-->
+        <property name="item5" value="#{spelBean.getString()}"/>
+
+    </bean>
+
+</beans>
