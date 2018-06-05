@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--同类抽象，定义一个base实例，class指向类，其他几个该类实例设置parent为base实例-->
+    <!--这个base实例因为只是用来注入相同属性的，我们不期待他被实例化，所以设置abstract="true"，其实设置不设置都不影响他继承-->
+    <bean id="baseStudent" class="com.xuanzilan.ssm.spring4.bean.abstractClass.Student"  abstract="true">
+        <property name="addr" value="西安"/>
+        <property name="school" value="西电"/>
+    </bean>
+
+    <bean id="student1" parent="baseStudent">
+        <property name="sid" value="4"></property>
+        <property name="age" value="4"></property>
+        <property name="name" value="李四"></property>
+    </bean>
+
+    <bean id="student2" parent="baseStudent">
+        <property name="sid" value="2"></property>
+        <property name="age" value="3"></property>
+        <property name="name" value="王五"></property>
+    </bean>
+
+    <!--异类抽象，定义一个base实例，由于没有相同的class类，该base实例需要是abstract的
+        因为如果定义了class，就会调用无参构造器，显然这个base实例是没有对应类的，也就没有无参构造器了-->
+    <bean id="baseClass" abstract="true">
+        <property name="addr" value="西安"/>
+        <property name="school" value="西电"/>
+    </bean>
+
+    <bean id="student3" class="com.xuanzilan.ssm.spring4.bean.abstractClass.Student" parent="baseStudent">
+        <property name="sid" value="4"></property>
+        <property name="age" value="4"></property>
+        <property name="name" value="李四"></property>
+    </bean>
+
+    <bean id="teacher" class="com.xuanzilan.ssm.spring4.bean.abstractClass.Teacher" parent="baseClass">
+        <property name="tid" value="2"></property>
+        <property name="tage" value="25"></property>
+        <property name="tname" value="王五"></property>
+    </bean>
+
+</beans>
