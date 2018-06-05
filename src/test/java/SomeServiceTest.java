@@ -40,7 +40,6 @@ public class SomeServiceTest {
      *      缺点：相对来说响应速度慢
      *  实际对开发中来说，ApplicationContext用的更快些
      */
-
     @Test
     public void doSome1(){
         //创建BeanFactory容器
@@ -49,7 +48,9 @@ public class SomeServiceTest {
         someService.doSome();
     }
 
-
+    /**
+     * 使用beanFactory获取bean，但这种方式增加了对factory的依赖
+     */
     @Test
     public void doSome2(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -57,10 +58,23 @@ public class SomeServiceTest {
         serviceFactory.getSomeService().doSome();
     }
 
+    /**
+     * 接doSome2，这里使用配置factory和bean的方式，去掉了factory和service的依赖
+     */
     @Test
     public void doSome3(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-        ISomeService someService = (SomeServiceImpl) ac.getBean("myService");
+        ISomeService someService = (SomeServiceImpl) ac.getBean("service1");
+        someService.doSome();
+    }
+
+    /**
+     * 接doSome3，调用factory的静态工厂方法
+     */
+    @Test
+    public void doSome4(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ISomeService someService = (SomeServiceImpl) ac.getBean("service1");
         someService.doSome();
     }
 
