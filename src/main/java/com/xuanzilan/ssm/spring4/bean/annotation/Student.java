@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  */
 //@Scope("prototype")
 @Component("myStudent")
-public class Student {
+public class Student{
     @Value("1")
     private int sid;
     @Value("张三")

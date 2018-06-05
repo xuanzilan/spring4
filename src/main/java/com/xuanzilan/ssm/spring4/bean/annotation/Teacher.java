@@ -3,12 +3,16 @@ package com.xuanzilan.ssm.spring4.bean.annotation;
 import org.springframework.stereotype.Component;
 
 @Component("myTeacher")
-public class Teacher {
+public class Teacher extends Person{
     private int tid;
     private String tname;
     private int tage;
     private String addr;
     private String school;
+
+    public Teacher() {
+        System.out.println("初始化teacher");
+    }
 
     public int getTid() {
         return tid;
