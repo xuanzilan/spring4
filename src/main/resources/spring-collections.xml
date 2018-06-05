@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="MyCo" class="com.xuanzilan.ssm.spring4.bean.MyCollections">
+        <!--数组-->
+        <property name="strs" >
+            <array>
+                <value>jjj</value>
+                <value>kkk</value>
+                <value>ooo</value>
+            </array>
+        </property>
+
+        <property name="students">
+            <list>
+                <ref bean="student2"></ref>
+                <ref bean="student3"></ref>
+            </list>
+        </property>
+
+        <property name="mySet">
+            <set>
+                <value>jjj</value>
+                <value>kkk</value>
+                <value>ooo</value>
+            </set>
+        </property>
+
+        <property name="myMap">
+            <map>
+                <entry key="a" value="1"/>
+                <entry key="b" value="2"/>
+                <entry key="c" value="3"/>
+            </map>
+        </property>
+
+        <property name="myPro">
+            <props>
+                <prop key="a">ddd</prop>
+                <prop key="b">eee</prop>
+                <prop key="c">333</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+    <bean id="student2" class="com.xuanzilan.ssm.spring4.bean.Student">
+        <constructor-arg name="sid" value="3"></constructor-arg>
+        <constructor-arg name="age" value="4"></constructor-arg>
+        <constructor-arg name="name" value="李四"></constructor-arg>
+    </bean>
+
+    <bean id="student3" class="com.xuanzilan.ssm.spring4.bean.Student">
+        <constructor-arg name="sid" value="2"></constructor-arg>
+        <constructor-arg name="age" value="3"></constructor-arg>
+        <constructor-arg name="name" value="王五"></constructor-arg>
+    </bean>
+
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--分别加载-->
+    <import resource="classpath:spring-collections.xml"></import>
+    <import resource="classpath:spring-student.xml"></import>
+
+    <!--也可以通配符加载，但是通配符还是有问题，后面看下-->
+    <!--<import resource="classpath:spring-*.xml"></import>-->
+
+</beans>
