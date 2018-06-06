@@ -27,6 +27,8 @@ import javax.annotation.Resource;
  * @Qualifier 如果想使用byName注入，需要将@Autowired和@Qualifier联合使用
  *
  * @Resource 基于JSR-250规范，@Resource表示通过byType注入，@Resource(name="myTeacher")表示通过byName注入
+ *
+ * @PostConstruct 和 @PreDestroy 分别对应bean中的init-method和destroy-method方法
  */
 //@Scope("prototype")
 @Component("myStudent")
